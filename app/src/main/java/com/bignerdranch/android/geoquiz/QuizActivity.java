@@ -32,7 +32,7 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
-    private boolean mUserCheated;
+    private boolean mUserCheated = false;
 
     @Override
     protected void onSaveInstanceState(Bundle instanceState) {
@@ -77,6 +77,7 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mUserCheated = false;
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
             }

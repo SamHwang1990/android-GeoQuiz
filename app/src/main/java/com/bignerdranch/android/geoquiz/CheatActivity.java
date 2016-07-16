@@ -34,9 +34,9 @@ public class CheatActivity extends AppCompatActivity {
                 int answer;
 
                 if (mAnswerIsTrue) {
-                    answer = R.string.correct_toast;
+                    answer = R.string.true_button;
                 } else {
-                    answer = R.string.incorrect_toast;
+                    answer = R.string.false_button;
                 }
 
                 mAnswerText.setText(answer);
