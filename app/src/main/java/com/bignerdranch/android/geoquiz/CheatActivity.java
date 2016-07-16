@@ -3,6 +3,7 @@ package com.bignerdranch.android.geoquiz;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class CheatActivity extends AppCompatActivity {
 
     private Button mCheatButton;
     private TextView mAnswerText;
+    private TextView mApiLevelText;
     private Boolean mAnswerIsTrue = false;
 
     @Override
@@ -25,6 +27,7 @@ public class CheatActivity extends AppCompatActivity {
 
         mCheatButton = (Button) findViewById(R.id.show_answer_button);
         mAnswerText = (TextView) findViewById(R.id.answer_text);
+        mApiLevelText = (TextView) findViewById(R.id.api_level_text);
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false);
 
@@ -44,6 +47,8 @@ public class CheatActivity extends AppCompatActivity {
                 setAnswerShownResult(true);
             }
         });
+
+        mApiLevelText.append(" " + Build.VERSION.SDK_INT + "");
     }
 
     private void setAnswerShownResult(boolean isAnswerShown) {
