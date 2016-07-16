@@ -14,6 +14,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final String KEY_CHEATED = "cheated";
     private static final int REQUEST_CODE_CHEAT = 0;
 
     private Button mTrueButton;
@@ -39,6 +40,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(instanceState);
         Log.d(TAG, "onSaveInstanceState(Bundle) called");
         instanceState.putInt(KEY_INDEX, mCurrentIndex);
+        instanceState.putBoolean(KEY_CHEATED, mUserCheated);
     }
 
     @Override
@@ -56,6 +58,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+            mUserCheated = savedInstanceState.getBoolean(KEY_CHEATED, false);
         }
 
         updateQuestion();
@@ -144,11 +147,13 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(boolean userPressedTrue) {
-        boolean questionAnswer = mQuestionBank[mCurrentIndex].isAnswerTrue();
+        Question question = mQuestionBank[mCurrentIndex];
+        boolean questionAnswer = question.isAnswerTrue();
         int msgId;
 
-        if (mUserCheated) {
+        if (mUserCheated || question.isAnswerCheated()) {
             msgId = R.string.judgement_toast;
+            question.setAnswerCheated(true);
         } else if (questionAnswer == userPressedTrue) {
             msgId = R.string.correct_toast;
         } else {

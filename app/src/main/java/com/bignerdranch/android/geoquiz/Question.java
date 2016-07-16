@@ -6,6 +6,15 @@ package com.bignerdranch.android.geoquiz;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mAnswerCheated;
+
+    public boolean isAnswerCheated() {
+        return mAnswerCheated;
+    }
+
+    public void setAnswerCheated(boolean answerCheated) {
+        mAnswerCheated = answerCheated;
+    }
 
     public int getTextResId() {
         return mTextResId;
